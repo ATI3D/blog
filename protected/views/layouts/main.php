@@ -24,6 +24,7 @@
 		);
 	?>
 
+    <!--
 	<script type="text/javascript">
 	var timetogo = 60;
 	var timer = window.setInterval(function()
@@ -39,6 +40,7 @@
 		timetogo--;
 	}, 1000);
 	</script>
+	-->
 	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	
@@ -48,8 +50,10 @@
 
 <div class="container" id="page">
 
+<!--
 <div id="counter"></div>
 <div id="newdiv"></div>
+-->
 
 	<div id="header">
 	
