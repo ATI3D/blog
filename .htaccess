@@ -1,0 +1,22 @@
+<IfModule mod_charset.c>
+  CharsetDisable On
+</IfModule>
+
+AddDefaultCharset UTF-8
+
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+# if a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+RewriteRule . index.php
+
+php_value upload_max_filesize 100M
+php_value max_execution_time 800
+php_value post_max_size 100M
+php_value max_input_time 100
+php_value memory_limit 120M
