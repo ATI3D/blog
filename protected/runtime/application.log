@@ -3138,3 +3138,20 @@ Stack trace:
 #12 C:\AppServ\www\yii\framework\base\CApplication.php(157): CApplication->onBeginRequest(Object(CEvent))
 #13 C:\AppServ\www\blog\index.php(13): CApplication->run()
 #14 {main} REQUEST_URI=/blog/site/index
+2011/11/21 22:45:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'ati'@'localhost' (using password: YES)' in D:\AppServ\www\yii\framework\db\CDbConnection.php:364
+Stack trace:
+#0 D:\AppServ\www\yii\framework\db\CDbConnection.php(313): CDbConnection->open()
+#1 D:\AppServ\www\yii\framework\db\CDbConnection.php(291): CDbConnection->setActive(true)
+#2 D:\AppServ\www\yii\framework\base\CModule.php(372): CDbConnection->init()
+#3 D:\AppServ\www\yii\framework\base\CApplication.php(429): CModule->getComponent('db')
+#4 D:\AppServ\www\yii\framework\db\ar\CActiveRecord.php(609): CApplication->getDb()
+#5 D:\AppServ\www\yii\framework\db\ar\CActiveRecord.php(2275): CActiveRecord->getDbConnection()
+#6 D:\AppServ\www\yii\framework\db\ar\CActiveRecord.php(372): CActiveRecordMetaData->__construct(Object(CoreSetting))
+#7 D:\AppServ\www\blog\protected\models\CoreSetting.php(20): CActiveRecord::model('CoreSetting')
+#8 D:\AppServ\www\blog\protected\components\RequestHandler.php(19): CoreSetting::model()
+#9 [internal function]: RequestHandler::initCoreSettings(Object(CEvent))
+#10 D:\AppServ\www\yii\framework\base\CComponent.php(569): call_user_func(Array, Object(CEvent))
+#11 D:\AppServ\www\yii\framework\base\CApplication.php(185): CComponent->raiseEvent('onBeginRequest', Object(CEvent))
+#12 D:\AppServ\www\yii\framework\base\CApplication.php(157): CApplication->onBeginRequest(Object(CEvent))
+#13 D:\AppServ\www\blog\index.php(13): CApplication->run()
+#14 {main} REQUEST_URI=/blog/
