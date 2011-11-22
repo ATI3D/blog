@@ -25,7 +25,7 @@ class CoreSetting extends CActiveRecord
      */
     public function tableName()
     {
-        return 'tbl_core_config';
+        return '{{core_config}}';
     }
 
     /**
