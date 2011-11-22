@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Изменение пользователя &rarr; <?php echo $user->username; ?></h1>
+<h1>Профиль пользователя &rarr; <?php echo $user->username; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('user'=>$user,'profile'=>$profile)); ?>
