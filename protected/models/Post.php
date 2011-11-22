@@ -17,6 +17,13 @@
  */
 class Post extends CActiveRecord
 {
+
+	const STATUS_DRAFT=1;
+	const STATUS_PUBLISHED=2;
+	const STATUS_ARCHIVED=3;
+
+	private $_oldTags;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Post the static model class
