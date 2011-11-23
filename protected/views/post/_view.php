@@ -23,7 +23,7 @@
 		<?php // echo CHtml::link('Permalink', $data->url); ?> |
 		<?php // echo CHtml::link("Comments ({$data->commentCount})",$data->url.'#comments'); ?> |
 		-->
-		Последнее обновление <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy в HH:mm", $data->create_time); ?>
+		Последнее обновление <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy в HH:mm", $data->update_time); ?>
 	</div>
 
 </div>
