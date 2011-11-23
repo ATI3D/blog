@@ -1,46 +1,29 @@
-<div class="view">
+<div class="post">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
+	<div class="title">
+		<?php echo CHtml::link(CHtml::encode($data->title), $data->url); ?>
+	</div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
-	<br />
+	<div class="author">
+		добавил <?php echo CHtml::link($data->user->username, array('user/view','id'=>$data->user->id)) . ' ' . Yii::app()->getDateFormatter()->format("d MMMM yyyy в HH:mm", $data->create_time); ?>
+        <?php if(Yii::app()->user->checkAccess(User::ROLE_MODER)): ?>
+            <span class="status_<?php echo $data->status; ?>" style="float: right;"><?php echo Lookup::item("PostStatus",$data->status); ?></span>
+        <?php endif; ?>
+    </div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
-	<?php echo CHtml::encode($data->title); ?>
-	<br />
+	<div class="content">
+        <?php echo (int)$_GET['id'] ? $data->content : $data->short_content; ?>
+	</div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('content')); ?>:</b>
-	<?php echo CHtml::encode($data->content); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('full_content')); ?>:</b>
-	<?php echo CHtml::encode($data->full_content); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('tags')); ?>:</b>
-	<?php echo CHtml::encode($data->tags); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
-	<?php echo CHtml::encode($data->status); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('rating')); ?>:</b>
-	<?php echo CHtml::encode($data->rating); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>
-	<?php echo CHtml::encode($data->create_time); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('update_time')); ?>:</b>
-	<?php echo CHtml::encode($data->update_time); ?>
-	<br />
-
-	*/ ?>
+	<div class="nav">
+		<b>Теги:</b>
+		<?php echo implode(', ', $data->tagLinks); ?>
+		<br/>
+        <!--
+		<?php // echo CHtml::link('Permalink', $data->url); ?> |
+		<?php // echo CHtml::link("Comments ({$data->commentCount})",$data->url.'#comments'); ?> |
+		-->
+		Последнее обновление <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy в HH:mm", $data->create_time); ?>
+	</div>
 
 </div>

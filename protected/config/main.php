@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'onBeginRequest'=>array('RequestHandler', 'initCoreSettings'),
+    'defaultController'=>'post',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -54,6 +55,8 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
+                'post/<id:\d+>/<title:.*?>'=>'post/view',
+        		'posts/<tag:.*?>'=>'post/index',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
@@ -97,6 +100,7 @@ return array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
+        'commentNeedApproval'=>true,
 		// this is used in contact page
 		// 'adminEmail'=>'webmaster@example.com',
 	),

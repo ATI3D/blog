@@ -70,7 +70,7 @@ class PostController extends Controller
 		{
 			$model->attributes=$_POST['Post'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create',array(
@@ -94,7 +94,7 @@ class PostController extends Controller
 		{
 			$model->attributes=$_POST['Post'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('update','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -127,7 +127,19 @@ class PostController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Post');
+        if(Yii::app()->user->checkAccess(User::ROLE_MODER))
+            $condition = 'status IN (1,2,3)';
+        else
+            $condition = 'status='.Post::STATUS_PUBLISHED.' OR status='.Post::STATUS_ARCHIVED;
+
+		$dataProvider=new CActiveDataProvider('Post', array(
+            'criteria'=>array(
+                'condition'=>$condition,
+                'order'=>'create_time DESC',
+                //'with'=>array('user'),
+            ),
+        ));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -169,7 +181,16 @@ class PostController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Post::model()->findByPk($id);
+        /*
+        if(isset($_GET['id']))
+        {
+            if(Yii::app()->user->isGuest)
+                $condition = 'status='.Post::STATUS_PUBLISHED.' OR status='.Post::STATUS_ARCHIVED;
+            else
+                $condition = '';
+        }
+        */
+		$model=Post::model()->findByPk($id, $condition);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

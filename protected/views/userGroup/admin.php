@@ -33,6 +33,7 @@ $this->menu=array(
 		//'level',
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{update}{delete}',
 		),
 	),
 )); ?>

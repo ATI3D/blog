@@ -20,17 +20,28 @@ $this->menu=array(
 		'id',
 		//'user_id',
 		'title',
-		'content',
+		//'content',
 		//'full_content',
 		//'tags',
-		/*
-		'status',
-		'rating',
-		'create_time',
-		'update_time',
-		*/
+		array(
+            'name'=>'status',
+			'value'=>'Lookup::item("PostStatus",$data->status)',
+			'filter'=>Lookup::items('PostStatus'),
+        ),
+		//'rating',
+		array(
+			'name'=>'create_time',
+			'filter'=>false,
+			'value'=>'Yii::app()->getDateFormatter()->format("d MMMM yyyy, HH:mm", $data->create_time)',
+		),
+		array(
+			'name'=>'update_time',
+			'filter'=>false,
+			'value'=>'Yii::app()->getDateFormatter()->format("d MMMM yyyy, HH:mm", $data->update_time)',
+		),
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{update}{delete}',
 		),
 	),
 )); ?>

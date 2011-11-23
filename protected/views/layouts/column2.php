@@ -30,20 +30,22 @@
 		</div>
 	<?php endif; ?>
 
-	<div class="span-5 last">
-		<div id="sidebar">
-		<?php
-			$this->beginWidget('zii.widgets.CPortlet', array(
-				'title'=>'Операции',
-			));
-			$this->widget('zii.widgets.CMenu', array(
-				'items'=>$this->menu,
-				'htmlOptions'=>array('class'=>'operations'),
-			));
-			$this->endWidget();
-		?>
-		</div><!-- sidebar -->
-	</div>
+    <?php if(Yii::app()->user->checkAccess(User::ROLE_MODER)): ?>
+        <div class="span-5 last">
+            <div id="sidebar">
+            <?php
+                $this->beginWidget('zii.widgets.CPortlet', array(
+                    'title'=>'Операции',
+                ));
+                $this->widget('zii.widgets.CMenu', array(
+                    'items'=>$this->menu,
+                    'htmlOptions'=>array('class'=>'operations'),
+                ));
+                $this->endWidget();
+            ?>
+            </div><!-- sidebar -->
+        </div>
+    <?php endif; ?>
 	
 </div>
 <?php $this->endContent(); ?>
