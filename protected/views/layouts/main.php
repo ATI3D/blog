@@ -69,9 +69,9 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Главная', 'url'=>array('/post/index')),
-				array('label'=>'О нас', 'url'=>array('/pages/view', 'id'=>1)),
+				array('label'=>'О нас', 'url'=>array('/page/view', 'id'=>1)),
 				array('label'=>'Участники', 'url'=>array('/user/index')),
-				array('label'=>'Контакты', 'url'=>array('/pages/view', 'id'=>2)),
+				array('label'=>'Контакты', 'url'=>array('/page/view', 'id'=>2)),
 				//array('label'=>'Профиль', 'url'=>array('/user/update','id'=>Yii::app()->user->id), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Вход', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
 				//array('label'=>'Выход ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest)

@@ -19,7 +19,7 @@
                         array('label'=>'Записи', 'url'=>array('/post/admin'), 'visible'=>Yii::app()->user->checkAccess(User::ROLE_MODER)),
 						array('label'=>'Пользователи', 'url'=>array('/user/admin'), 'visible'=>Yii::app()->user->checkAccess(User::ROLE_ADMIN)),
 						array('label'=>'Группы', 'url'=>array('/userGroup/admin'), 'visible'=>Yii::app()->user->checkAccess(User::ROLE_ADMIN)),
-						array('label'=>'Страницы', 'url'=>array('/pages/admin'), 'visible'=>Yii::app()->user->checkAccess(User::ROLE_ADMIN)),
+						array('label'=>'Страницы', 'url'=>array('/page/admin'), 'visible'=>Yii::app()->user->checkAccess(User::ROLE_ADMIN)),
 						array('label'=>'Настройки', 'url'=>array('/coreSetting/admin'), 'visible'=>Yii::app()->user->checkAccess(User::ROLE_ADMIN)),
 					),
 					'htmlOptions'=>array('class'=>'operations'),

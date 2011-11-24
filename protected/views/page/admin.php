@@ -12,7 +12,7 @@ $this->menu=array(
 <h1>Управление страницами</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	//'id'=>'pages-grid',
+	//'id'=>'page-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'columns'=>array(

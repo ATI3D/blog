@@ -27,15 +27,15 @@ class PostController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','rating'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','suggestTags'),
+				'actions'=>array('create','update','admin','suggestTags'),
 				'roles'=>array(User::ROLE_MODER),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('delete'),
 				'roles'=>array(User::ROLE_ADMIN),
 			),
 			array('deny',  // deny all users
@@ -70,7 +70,11 @@ class PostController extends Controller
 		{
 			$model->attributes=$_POST['Post'];
 			if($model->save())
-				$this->redirect(array('admin'));
+            {
+                Yii::app()->user->setFlash('success','Новая запись успешно добавлена!');
+                $this->redirect(array('admin'));
+            }
+
 		}
 
 		$this->render('create',array(
@@ -94,7 +98,10 @@ class PostController extends Controller
 		{
 			$model->attributes=$_POST['Post'];
 			if($model->save())
-				$this->redirect(array('update','id'=>$model->id));
+            {
+                Yii::app()->user->setFlash('success','Запись успешно отредактирована!');
+                $this->redirect(array('update','id'=>$model->id));
+            }
 		}
 
 		$this->render('update',array(
@@ -127,17 +134,21 @@ class PostController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$criteria=new CDbCriteria(array(
+			'order'=>'create_time DESC',
+			//'with'=>array('user'),
+		));
+
         if(Yii::app()->user->checkAccess(User::ROLE_MODER))
-            $condition = 'status IN (1,2,3)';
+            $criteria->addInCondition('status', array(Post::STATUS_DRAFT, Post::STATUS_PUBLISHED, Post::STATUS_ARCHIVED));
         else
-            $condition = 'status='.Post::STATUS_PUBLISHED.' OR status='.Post::STATUS_ARCHIVED;
+            $criteria->addInCondition('status', array(Post::STATUS_PUBLISHED, Post::STATUS_ARCHIVED));
+
+		if(isset($_GET['tag']))
+			$criteria->addSearchCondition('tags',$_GET['tag']);
 
 		$dataProvider=new CActiveDataProvider('Post', array(
-            'criteria'=>array(
-                'condition'=>$condition,
-                'order'=>'create_time DESC',
-                //'with'=>array('user'),
-            ),
+            'criteria'=>$criteria,
         ));
 
 		$this->render('index',array(
@@ -181,20 +192,42 @@ class PostController extends Controller
 	 */
 	public function loadModel($id)
 	{
-        /*
-        if(isset($_GET['id']))
-        {
-            if(Yii::app()->user->isGuest)
-                $condition = 'status='.Post::STATUS_PUBLISHED.' OR status='.Post::STATUS_ARCHIVED;
-            else
-                $condition = '';
-        }
-        */
-		$model=Post::model()->findByPk($id, $condition);
+		$model=Post::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
+    public function actionRating()
+    {
+        //echo $_POST['id'] . ' and ' . $_POST['rate'];
+        //$post = Post::model()->findByPk((int)$_POST['id']);
+        // наращиваем количество просмотров поста
+        // $post->saveCounters(array('rating'=>(int)$_POST['rate']));
+
+        $model = new PostRating;
+        $model->rating = (int)$_POST['rate'];
+        $model->post_id = (int)$_POST['id'];
+        $model->user_id = Yii::app()->user->id;
+
+        $count = PostRating::model()->exists(
+            'post_id=:post_id AND user_id=:user_id',
+            array(
+                 ':post_id'=>(int)$_POST['id'],
+                 ':user_id'=>Yii::app()->user->id
+            )
+        );
+
+        if($count)
+            echo 'Вы уже голосовали.';
+
+        elseif($model->save())
+            echo 'Спасибо ваш голос учтен.';
+
+        else
+            echo 'Произошла ошибка при голосовании.';
+
+    }
 
 	/**
 	 * Performs the AJAX validation.

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "{{pages}}".
+ * This is the model class for table "{{Page}}".
  *
- * The followings are the available columns in table '{{pages}}':
+ * The followings are the available columns in table '{{Page}}':
  * @property integer $id
  * @property string $slug
  * @property string $name
@@ -13,11 +13,11 @@
  * @property string $text
  * @property integer $update_time
  */
-class Pages extends CActiveRecord
+class Page extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Pages the static model class
+	 * @return Page the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +29,7 @@ class Pages extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{pages}}';
+		return '{{page}}';
 	}
 
 	/**

@@ -13,6 +13,6 @@ $this->pageKeywords = $model->keywords;
 <p>
 	<?php 
 	if(Yii::app()->user->checkAccess(User::ROLE_MODER))
-		echo CHtml::link('Редактировать', array('pages/update', 'id'=>$model->id));
+		echo CHtml::link('Редактировать', array('page/update', 'id'=>$model->id));
 	?>
 </p>

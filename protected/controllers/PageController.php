@@ -1,6 +1,6 @@
 <?php
 
-class PagesController extends Controller
+class PageController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,14 +61,14 @@ class PagesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Pages;
+		$model=new Page;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Pages']))
+		if(isset($_POST['Page']))
 		{
-			$model->attributes=$_POST['Pages'];
+			$model->attributes=$_POST['Page'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -90,9 +90,9 @@ class PagesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Pages']))
+		if(isset($_POST['Page']))
 		{
-			$model->attributes=$_POST['Pages'];
+			$model->attributes=$_POST['Page'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -127,7 +127,7 @@ class PagesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Pages');
+		$dataProvider=new CActiveDataProvider('Page');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +138,10 @@ class PagesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Pages('search');
+		$model=new Page('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Pages']))
-			$model->attributes=$_GET['Pages'];
+		if(isset($_GET['Page']))
+			$model->attributes=$_GET['Page'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +155,7 @@ class PagesController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Pages::model()->findByPk($id);
+		$model=Page::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,7 +167,7 @@ class PagesController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='pages-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='Page-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

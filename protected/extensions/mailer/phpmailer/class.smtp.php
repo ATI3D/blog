@@ -3,7 +3,7 @@
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
 |   Version: 5.0.0                                                          |
-|   Contact: via sourceforge.net support pages (also www.codeworxtech.com)  |
+|   Contact: via sourceforge.net support page (also www.codeworxtech.com)  |
 |      Info: http://phpmailer.sourceforge.net                               |
 |   Support: http://sourceforge.net/projects/phpmailer/                     |
 | ------------------------------------------------------------------------- |

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Pages',
+	'Страницы',
 );
 
 $this->menu=array(
