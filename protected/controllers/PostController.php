@@ -200,20 +200,20 @@ class PostController extends Controller
 
     public function actionRating()
     {
-        //echo $_POST['id'] . ' and ' . $_POST['rate'];
-        //$post = Post::model()->findByPk((int)$_POST['id']);
         // наращиваем количество просмотров поста
         // $post->saveCounters(array('rating'=>(int)$_POST['rate']));
 
+        //echo $_POST['rate']; exit();
+
         $model = new PostRating;
-        $model->rating = (int)$_POST['rate'];
-        $model->post_id = (int)$_POST['id'];
+        $model->rating = $_POST['rate'];
+        $model->post_id = $_POST['id'];
         $model->user_id = Yii::app()->user->id;
 
         $count = PostRating::model()->exists(
             'post_id=:post_id AND user_id=:user_id',
             array(
-                 ':post_id'=>(int)$_POST['id'],
+                 ':post_id'=>$_POST['id'],
                  ':user_id'=>Yii::app()->user->id
             )
         );

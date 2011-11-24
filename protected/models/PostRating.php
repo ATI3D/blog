@@ -11,6 +11,7 @@
  */
 class PostRating extends CActiveRecord
 {
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return PostRating the static model class
@@ -37,7 +38,8 @@ class PostRating extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('rating, post_id, user_id', 'required'),
-			array('rating, post_id, user_id', 'numerical', 'integerOnly'=>true),
+			array('post_id, user_id', 'numerical', 'integerOnly'=>true),
+            array('rating', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, rating, post_id, user_id', 'safe', 'on'=>'search'),
@@ -68,11 +70,43 @@ class PostRating extends CActiveRecord
 		);
 	}
 
+	/**
+	 * @return rating post or false.
+	 */
     public function getRating($post_id)
     {
-        //$summ = PostRating::model()->findBySql('SELECT SUM(rating) FROM tbl_post_rating WHERE post_id=:post_id' , array('post_id'=>$post_id));
-        $count = PostRating::model()->count('post_id=:post_id',array(':post_id'=>$post_id));
-        return (int)$count;
+        $criteria=new CDbCriteria;
+        $criteria->select='SUM(rating) as rating';  // подходит только то имя поля, которое уже есть в модели
+        $criteria->condition='post_id=:post_id';
+        $criteria->params=array(':post_id'=>$post_id);
+        // Получаем общий рейтинг
+        $rating = self::model()->find($criteria)->getAttribute('rating');
+        // Получаем кол-во записей
+        $count = self::model()->count('post_id=:post_id',array(':post_id'=>$post_id));
+
+        if($rating > 0 && $count > 0)
+            return round($rating / $count);
+        else
+            return false;
+    }
+
+	/**
+	 * @return boolean.
+	 */
+    public function getWhoVoted($post_id, $user_id)
+    {
+        $count = self::model()->exists(
+            'post_id=:post_id AND user_id=:user_id',
+            array(
+                 ':post_id'=>(int)$post_id,
+                 ':user_id'=>$user_id
+            )
+        );
+
+        if($count)
+            return true;
+        else
+            return false;
     }
 
 	/**

@@ -25,32 +25,11 @@
 		-->
 		Последнее обновление <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy в HH:mm", $data->update_time); ?>
 
-        <span style="float: right;">
-            <?php if((int)$_GET['id']): ?>
-                <?php
-                $this->widget('CStarRating',array(
-                        'name'=>'rating',
-                        'callback'=>'
-                            function(){
-                                $.ajax({
-                                    type: "POST",
-                                    url: "' . Yii::app()->createUrl('post/rating') . '",
-                                    data: "id=' . $data->id . '&rate=" + $(this).val(),
-                                    success: function(msg){
-                                        alert( "Data Saved: " + msg );
-                                    }
-                                })
-                            }',
-                        'value'=>PostRating::getRating($data_id),
-                        'ratingStepSize'=>1,
-                        'maxRating'=>5,
-                        //'resetText'=>'',
-                        //'resetValue'=>'',
-                        //'readOnly'=>true,
-                    ));
-                ?>
-            <?php endif; ?>
-        </span>
+        <?php if((int)$_GET['id'] && !Yii::app()->user->isGuest): ?>
+            <span style="float: right;">
+                <?php echo $this->renderPartial('_rating', array('data'=>$data)); ?>
+            </span>
+        <?php endif; ?>
 
 	</div>
 
