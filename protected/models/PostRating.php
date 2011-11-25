@@ -64,7 +64,7 @@ class PostRating extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'rating' => 'Rating',
+			'rating' => 'Рейтинг',
 			'post_id' => 'Post',
 			'user_id' => 'User',
 		);
@@ -85,7 +85,7 @@ class PostRating extends CActiveRecord
         $count = self::model()->count('post_id=:post_id',array(':post_id'=>$post_id));
 
         if($rating > 0 && $count > 0)
-            return $rating / $count; // round($rating / $count)
+            return round($rating / $count);
         else
             return false;
     }

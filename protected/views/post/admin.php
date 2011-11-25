@@ -28,7 +28,11 @@ $this->menu=array(
 			'value'=>'Lookup::item("PostStatus",$data->status)',
 			'filter'=>Lookup::items('PostStatus'),
         ),
-		//'rating',
+		array(
+			'name'=>'rating.rating',
+			//'filter'=>false,
+			'value'=>'PostRating::getRating($data->id)',
+		),
 		array(
 			'name'=>'create_time',
 			'filter'=>false,
@@ -41,7 +45,7 @@ $this->menu=array(
 		),
 		array(
 			'class'=>'CButtonColumn',
-			'template'=>'{update}{delete}',
+			'template'=>'{view}{update}{delete}',
 		),
 	),
 )); ?>

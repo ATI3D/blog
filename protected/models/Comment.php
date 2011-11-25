@@ -42,7 +42,7 @@ class Comment extends CActiveRecord
             'NestedSetBehavior'=>array(
                 'class'=>'ext.trees.NestedSetBehavior',
                 'hasManyRoots'=>true,
-                //'rootAttribute'=>'post_id',
+                'rootAttribute'=>'post_id',
                 'leftAttribute'=>'lft',
                 'rightAttribute'=>'rgt',
                 'levelAttribute'=>'level',
