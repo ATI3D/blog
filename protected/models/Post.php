@@ -109,6 +109,10 @@ class Post extends CActiveRecord
 	{
 		parent::afterSave();
 		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
+        
+        $model = new Comment;
+        $model->root = $this->id;
+        $model->content = NULL;
 	}
 
 	/**
