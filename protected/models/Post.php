@@ -109,10 +109,17 @@ class Post extends CActiveRecord
 	{
 		parent::afterSave();
 		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
-        
-        $model = new Comment;
-        $model->root = $this->id;
-        $model->content = NULL;
+
+        if($this->isNewRecord)
+        {
+            $model = new Comment;
+            //$model->root = $this->id;
+            $model->post_id = $this->id;
+            $model->user_id = $this->user_id;
+            $model->content = NULL;
+            $model->create_time = $this->create_time;
+            $model->saveNode();
+        }
 	}
 
 	/**
@@ -136,6 +143,7 @@ class Post extends CActiveRecord
             'user' => array(self::BELONGS_TO, 'User', 'user_id'),
             'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
             'rating'=>array(self::HAS_MANY, 'PostRating','post_id'),
+            'commentCount' => array(self::STAT, 'Comment', 'post_id', 'condition'=>'level > 1'), // TODO level > 1
 		);
 	}
 

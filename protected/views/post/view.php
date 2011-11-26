@@ -16,6 +16,17 @@ $this->menu=array(
 */
 ?>
 
-<?php $this->renderPartial('_view', array(
-	'data'=>$model,
-)); ?>
+<div class="post">
+    <?php $this->renderPartial('_view', array(
+        'data'=>$model,
+    )); ?>
+</div>
+
+<h3>Комментарии:</h3>
+
+<div id="comments">
+    <?php $this->renderPartial('/comment/_view',array(
+        'data'=>$comments,
+        //'comments'=>$model->comments,
+    )); ?>
+</div>

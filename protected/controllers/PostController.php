@@ -50,8 +50,12 @@ class PostController extends Controller
 	 */
 	public function actionView($id)
 	{
+        $comments = Comment::model()->find('post_id=:post_id', array(':post_id'=>$id));
+        $descendants = $comments->descendants()->findAll();
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+            'comments'=>$descendants,
 		));
 	}
 

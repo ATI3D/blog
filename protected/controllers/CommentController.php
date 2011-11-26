@@ -70,13 +70,12 @@ class CommentController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-        /*
-        $model->content = 'Hello, peaple';
-        $model->post_id = 1;
-        $model->user_id = 2;
-        $root = Comment::model()->findByPk(2);
+        $model->content = 'Здарово коль не шутишь!';
+        $model->post_id = 2;
+        $model->user_id = Yii::app()->user->id;
+        $model->create_time = time();
+        $root = Comment::model()->findByPk(8);
         $model->appendTo($root);
-        */
 
         /*
         $model->post_id = 1;
