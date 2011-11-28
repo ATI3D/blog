@@ -4,12 +4,14 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
+/*
 $this->menu=array(
 	array('label'=>'List Comment', 'url'=>array('index')),
 	array('label'=>'Manage Comment', 'url'=>array('admin')),
 );
+*/
 ?>
 
-<h1>Create Comment</h1>
+<h1>Добавить комментарий</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

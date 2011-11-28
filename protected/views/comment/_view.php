@@ -1,31 +1,5 @@
-<!--
-<?php foreach($data as $comment): ?>
-
-    <div class="comment" id="c<?php echo $comment->id; ?>" style="margin-left: <?php echo $comment->level > 2 ? $comment->level * 10 : 0; ?>px">
-
-        <?php echo CHtml::link("#{$comment->id}", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
-            'class'=>'cid',
-            'title'=>'Permalink to this comment',
-        )); ?>
-
-        <div class="author">
-            <?php echo $comment->user->username; ?> says:
-        </div>
-
-        <div class="time">
-            <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy, HH:mm", $comment->create_time); ?>
-        </div>
-
-        <div class="content">
-            <?php echo nl2br(CHtml::encode($comment->content)); ?>
-        </div>
-
-    </div>
-
-<?php endforeach; ?>
--->
-
 <?php $level=0; ?>
+
 <?php foreach($data as $n=>$comment): ?>
     <?php if($comment->level==$level): ?>
         <?php echo CHtml::closeTag('li')."\n"; ?>
@@ -42,13 +16,13 @@
 
     <?php echo CHtml::openTag('li'); ?>
         <div class="comment">
-            <?php echo CHtml::link("#{$comment->id}", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
+            <?php /* echo CHtml::link("#{$comment->id}", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
                 'class'=>'cid',
                 'title'=>'Permalink to this comment',
-            )); ?>
+            )); */ ?>
 
             <div class="author">
-                <?php echo $comment->user->username; ?> says:
+                <?php echo $comment->user->username; ?>
             </div>
 
             <div class="time">

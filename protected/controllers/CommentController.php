@@ -66,35 +66,34 @@ class CommentController extends Controller
 	public function actionCreate()
 	{
 		$model=new Comment;
+        
+		if(isset($_POST['Comment']))
+		{
+			$model->attributes=$_POST['Comment'];
+            $model->post_id = $_GET['id'];
+            $model->user_id = Yii::app()->user->id;
+            $model->create_time = time();
+
+			if($model->saveNode())
+				$this->redirect(array('post/view','id'=>$_GET['id']));
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-        $model->content = 'Здарово коль не шутишь!';
-        $model->post_id = 2;
-        $model->user_id = Yii::app()->user->id;
-        $model->create_time = time();
+        /*
         $root = Comment::model()->findByPk(8);
         $model->appendTo($root);
+        */
 
         /*
         $model->post_id = 1;
         $model->user_id = 1;
         $model->content = 'Hello World!';
         $model->saveNode();
-        */
-
-        /*
-		if(isset($_POST['Comment']))
-		{
-			$model->attributes=$_POST['Comment'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
         */
 	}
 

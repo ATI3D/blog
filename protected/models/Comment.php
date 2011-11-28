@@ -66,19 +66,19 @@ class Comment extends CActiveRecord
 			// Please remove those attributes that should not be searched.
 			array('id, root, lft, rgt, level, post_id, user_id, content, create_time', 'safe', 'on'=>'search'),
             */
-            array('content, post_id, user_id, create_time', 'safe'),
+            array('post_id, user_id, create_time', 'safe'),
+            array('content','required'),
 		);
 	}
 
-    /*
     protected function beforeSave()
     {
         parent::beforeSave();
 
         if($this->isNewRecord)
             $this->create_time = time();
+        return true;
     }
-    */
 
 	/**
 	 * @return array relational rules.

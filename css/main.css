@@ -294,9 +294,9 @@ div.search-form
 
 .comment
 {
-	-moz-border-radius:7px;
+	/*-moz-border-radius:7px;*/
 	padding: 10px;
-	background: #F5F5F5;
+	/*background: #F5F5F5;*/
 	margin: 5px 0;
 }
 
