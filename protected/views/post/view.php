@@ -1,8 +1,10 @@
 <?php
+/*
 $this->breadcrumbs=array(
 	'Posts'=>array('index'),
 	$model->title,
 );
+*/
 
 $this->pageTitle=$model->title;
 /*
@@ -22,11 +24,18 @@ $this->menu=array(
     )); ?>
 </div>
 
-<h3>Комментарии:</h3>
-
 <div id="comments">
     <?php $this->renderPartial('/comment/_view',array(
         'data'=>$comments,
-        //'comments'=>$model->comments,
+        //'model'=>$comment,
     )); ?>
 </div>
+
+<?php if(Yii::app()->user->checkAccess(User::ROLE_USER)): ?>
+    <div>
+        <?php $this->renderPartial('/comment/_form',array(
+            'model'=>$comment,
+        )); ?>
+    </div>
+<?php endif; ?>
+

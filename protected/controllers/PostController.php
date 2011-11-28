@@ -52,10 +52,12 @@ class PostController extends Controller
 	{
         $comments = Comment::model()->find('post_id=:post_id', array(':post_id'=>$id));
         $descendants = $comments->descendants()->findAll();
+        $comment = new Comment;
 
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
             'comments'=>$descendants,
+            'comment'=>$comment, // TODO
 		));
 	}
 

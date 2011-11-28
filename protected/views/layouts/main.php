@@ -43,6 +43,26 @@
 	-->
 	
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
+    <script type="text/javascript">
+         $(document).ready(function() {
+            $("div.comment").mouseover(function(){
+                //$(this).css("background", "#F5F5F5");
+                $(this).children('div.answer').css("display", "block");
+            });
+            $("div.comment").mouseout(function(){
+                //$(this).css("background", "");
+                $(this).children('div.answer').css("display", "none");
+            });
+
+            /*
+            $("div.answer").click(function(){
+                $(this).children('div.answer_form').css("display", "block");
+                $(this).children("a").remove();
+            });
+            */
+         });
+    </script>
 	
 </head>
 

@@ -66,16 +66,39 @@ class CommentController extends Controller
 	public function actionCreate()
 	{
 		$model=new Comment;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+        //print_r($_POST['Comment']); print_r($_GET); exit();
         
 		if(isset($_POST['Comment']))
 		{
 			$model->attributes=$_POST['Comment'];
-            $model->post_id = $_GET['id'];
-            $model->user_id = Yii::app()->user->id;
-            $model->create_time = time();
 
-			if($model->saveNode())
-				$this->redirect(array('post/view','id'=>$_GET['id']));
+            $model->post_id = (int)$_GET['id'];
+
+            if(!empty($_GET['pid']) && $_GET['pid'] != 0)
+                $root = Comment::model()->findByPk((int)$_GET['pid']);
+            elseif(!empty($_GET['id']))
+            {
+                $root = Comment::model()->find(
+                    'post_id = :post_id AND level = 1',
+                    array(
+                         ':post_id'=>(int)$_GET['id']
+                    )
+                );
+            }
+            else
+                throw new CHttpException(404,'The requested page does not exist.');
+
+            if($model->appendTo($root))
+            {
+                Yii::app()->user->setFlash('success','Комментарий успешно добавлен');
+                $this->redirect(array('post/view','id'=>$_GET['id']));
+            }
+            else
+                throw new CHttpException(404,'The requested page does not exist.');
 		}
 
 		$this->render('create',array(

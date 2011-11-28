@@ -68,6 +68,7 @@ class Comment extends CActiveRecord
             */
             array('post_id, user_id, create_time', 'safe'),
             array('content','required'),
+            array('content', 'length', 'max'=>255),
 		);
 	}
 
@@ -76,7 +77,10 @@ class Comment extends CActiveRecord
         parent::beforeSave();
 
         if($this->isNewRecord)
+        {
+            $this->user_id = Yii::app()->user->id;
             $this->create_time = time();
+        }
         return true;
     }
 
@@ -105,7 +109,7 @@ class Comment extends CActiveRecord
 			'level' => 'Level',
 			'post_id' => 'Post',
 			'user_id' => 'User',
-			'content' => 'Content',
+			'content' => 'Комментарий',
 			'create_time' => 'Create Time',
 		);
 	}

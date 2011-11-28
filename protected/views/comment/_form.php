@@ -3,6 +3,10 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'comment-form',
 	'enableAjaxValidation'=>false,
+    'htmlOptions'=>array(
+        'class'=>'comment-form',
+    ),
+    'action'=>CHtml::normalizeUrl(array('comment/create','id'=>(int)$_GET['id'],'pid'=>(int)$_GET['pid'])),
 )); ?>
 
 	<div class="row">
