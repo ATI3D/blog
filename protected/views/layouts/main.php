@@ -47,12 +47,12 @@
     <script type="text/javascript">
          $(document).ready(function() {
             $("div.comment").mouseover(function(){
-                //$(this).css("background", "#F5F5F5");
-                $(this).children('div.answer').css("display", "block");
+                $(this).css("background", "#F5F5F5");
+                $(this).children('span.answer').css("display", "block");
             });
             $("div.comment").mouseout(function(){
-                //$(this).css("background", "");
-                $(this).children('div.answer').css("display", "none");
+                $(this).css("background", "");
+                $(this).children('span.answer').css("display", "none");
             });
 
             /*
@@ -63,7 +63,7 @@
             */
          });
     </script>
-	
+
 </head>
 
 <body>

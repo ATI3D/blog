@@ -68,7 +68,7 @@ class Comment extends CActiveRecord
             */
             array('post_id, user_id, create_time', 'safe'),
             array('content','required'),
-            array('content', 'length', 'max'=>255),
+            array('content', 'length', 'max'=>1000),
 		);
 	}
 

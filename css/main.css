@@ -307,9 +307,17 @@ div.search-form
 
 .comment .author
 {
-	margin: 5px 0;
-	padding: 0 0 3px;
-	border-bottom: 1px solid #DDD;
+    margin-top: 5px;
+    margin-right: 10px;
+	color: #888;
+	font-size: 0.9em;
+	/* border-bottom: 1px solid #DDD; */
+}
+
+.comment .avatar
+{
+    margin-right: 10px;
+    overflow: hidden;
 }
 
 .comment .time
@@ -318,6 +326,13 @@ div.search-form
 	font-size: 0.8em;
 }
 
+.answer
+{
+    display: none;
+    float: right;
+}
+
+/*
 .comment a.cid
 {
 	color:#CCC;
@@ -333,13 +348,9 @@ div.search-form
 	color:#555;
 }
 
+
 .comment .pending
 {
 	color:red;
 }
-
-.answer
-{
-    display: none;
-    float: right;
-}
+*/

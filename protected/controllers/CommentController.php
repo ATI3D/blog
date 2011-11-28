@@ -68,7 +68,7 @@ class CommentController extends Controller
 		$model=new Comment;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
         //print_r($_POST['Comment']); print_r($_GET); exit();
         
@@ -97,8 +97,8 @@ class CommentController extends Controller
                 Yii::app()->user->setFlash('success','Комментарий успешно добавлен');
                 $this->redirect(array('post/view','id'=>$_GET['id']));
             }
-            else
-                throw new CHttpException(404,'The requested page does not exist.');
+           // else
+               // throw new CHttpException(404,'The requested page does not exist.');
 		}
 
 		$this->render('create',array(
