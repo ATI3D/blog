@@ -21,7 +21,9 @@
 
         <?php echo CHtml::openTag('li'); ?>
             <div class="comment" style="background-color: <?php echo $comment->id == $_GET['pid'] ? '#F5F5F5' : ''; ?>">
+
                 <a name="c<?php echo $comment->id; ?>"></a>
+
                 <?php/* echo CHtml::link("", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
                     'class'=>'cid',
                 ));*/ ?>
@@ -35,11 +37,45 @@
                     ));
                     ?>
                 </span>
+
                 <span class="author">
                     <?php echo CHtml::link($comment->user->username, array('user/view', 'id'=>$comment->user->id)); ?>
                 </span>
+
                 <span class="time">
                     <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy, HH:mm", $comment->create_time); ?>
+                </span>
+
+                <span class="rating">
+                    <?php echo CommentRating::getRating($comment->id); ?>
+
+                    <?php echo CHtml::ajaxLink(CHtml::image(Yii::app()->baseUrl . '/images/plus.png', 'Плюсануть'),
+                                               Yii::app()->createUrl('comment/rating'),
+                                               array(
+                                                   'type' => 'POST',
+                                                   'data' => array('id' => $comment->id, 'rating' => 1),
+                                                   //'update' => '.rating',
+                                                   'success' => 'function(data){
+                                                       $("#voteplus' . $comment->id . '").parent("span.rating").text(data);
+                                                   }'
+                                               ),
+                                               array('id'=>'voteplus'.$comment->id)
+                                            );
+                    ?>
+
+                    <?php echo CHtml::ajaxLink(CHtml::image(Yii::app()->baseUrl . '/images/minus.png', 'Минусануть'),
+                                               Yii::app()->createUrl('comment/rating'),
+                                               array(
+                                                   'type' => 'POST',
+                                                   'data' => array('id' => $comment->id, 'rating' => -1),
+                                                   //'update' => '.rating',
+                                                   'success' => 'function(data){
+                                                       $("#voteminus' . $comment->id . '").parent("span.rating").text(data);
+                                                   }'
+                                               ),
+                                               array('id'=>'voteminus'.$comment->id)
+                                            );
+                    ?>
                 </span>
 
                 <span class="answer">
@@ -49,6 +85,7 @@
                 <div class="content">
                     <?php echo nl2br(CHtml::encode($comment->content)); ?>
                 </div>
+
             </div>
         <?php $level=$comment->level; ?>
     <?php endforeach; ?>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+	<meta name="language" content="ru" />
 
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
@@ -47,20 +47,15 @@
     <script type="text/javascript">
          $(document).ready(function() {
             $("div.comment").mouseover(function(){
-                $(this).css("background", "#F5F5F5");
+                //$(this).css("background", "#F5F5F5");
+                $(this).parent("li").css("list-style","disc");
                 $(this).children('span.answer').css("display", "block");
             });
             $("div.comment").mouseout(function(){
-                $(this).css("background", "");
+                //$(this).css("background", "");
+                $(this).parent("li").css("list-style","none");
                 $(this).children('span.answer').css("display", "none");
             });
-
-            /*
-            $("div.answer").click(function(){
-                $(this).children('div.answer_form').css("display", "block");
-                $(this).children("a").remove();
-            });
-            */
          });
     </script>
 

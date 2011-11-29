@@ -24,7 +24,7 @@
         -->
         <?php echo CHtml::link("Комментарии ({$data->commentCount})",$data->url.'#comments'); ?> |
 
-        Последнее обновление <?php echo Yii::app()->getDateFormatter()->format("d MMMM yyyy в HH:mm", $data->update_time); ?>
+        Последнее обновление <?php echo EDate::timeAgo(date('d.m.Y H:i:s',$data->update_time)); ?>
 
         <?php if((int)$_GET['id'] && !Yii::app()->user->isGuest): ?>
             <span style="float: right;">

@@ -27,7 +27,7 @@ class CommentController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','rating'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -246,6 +246,42 @@ class CommentController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
+    public function actionRating()
+    {
+        // наращиваем количество просмотров поста
+        // $post->saveCounters(array('rating'=>(int)$_POST['rate']));
+
+        //print_r($_POST); exit();
+
+		if(Yii::app()->request->isPostRequest)
+		{
+            $model = new CommentRating;
+            $model->rating = $_POST['rating'];
+            $model->comment_id = $_POST['id'];
+            $model->user_id = Yii::app()->user->id;
+
+            $count = CommentRating::model()->exists(
+                'comment_id=:comment_id AND user_id=:user_id',
+                array(
+                     ':comment_id'=>$_POST['id'],
+                     ':user_id'=>Yii::app()->user->id
+                )
+            );
+
+            if($count)
+                echo 'Вы уже голосовали.';
+
+            elseif($model->save())
+                echo 'Спасибо ваш голос учтен.';
+
+            else
+                echo 'Произошла ошибка при голосовании.';
+        }
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+
+    }
 
 	/**
 	 * Performs the AJAX validation.

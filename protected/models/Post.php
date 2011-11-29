@@ -113,6 +113,7 @@ class Post extends CActiveRecord
         if($this->isNewRecord)
         {
             $model = new Comment;
+            $model->scenario = 'root';
             //$model->root = $this->id;
             $model->post_id = $this->id;
             $model->user_id = $this->user_id;

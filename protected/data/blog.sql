@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Хост: localhost
--- Время создания: Ноя 28 2011 г., 10:04
+-- Время создания: Ноя 29 2011 г., 20:27
 -- Версия сервера: 5.0.51
 -- Версия PHP: 5.2.6
 
@@ -33,21 +33,36 @@ CREATE TABLE `tbl_comment` (
   KEY `lft` (`lft`),
   KEY `rgt` (`rgt`),
   KEY `level` (`level`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 -- 
 -- Дамп данных таблицы `tbl_comment`
 -- 
 
-INSERT INTO `tbl_comment` VALUES (1, 1, 1, 12, 1, 1, 2, NULL, 1322305280);
-INSERT INTO `tbl_comment` VALUES (2, 1, 2, 11, 2, 1, 1, 'Всем привет', 1322305331);
-INSERT INTO `tbl_comment` VALUES (3, 1, 3, 8, 3, 1, 1, 'И тебе привет!', 1322305367);
-INSERT INTO `tbl_comment` VALUES (4, 1, 4, 7, 4, 1, 1, 'Как тут у вас дела?!', 1322305386);
-INSERT INTO `tbl_comment` VALUES (5, 1, 5, 6, 5, 1, 1, 'Все отлично! Не ссы!', 1322305417);
-INSERT INTO `tbl_comment` VALUES (6, 1, 9, 10, 3, 1, 1, 'О чем базар?', 1322305471);
-INSERT INTO `tbl_comment` VALUES (7, 7, 1, 6, 1, 2, 2, NULL, 1322305511);
-INSERT INTO `tbl_comment` VALUES (8, 7, 2, 5, 2, 2, 1, 'Тут тоже всем привет!', 1322305623);
-INSERT INTO `tbl_comment` VALUES (9, 7, 3, 4, 3, 2, 2, 'Здарово коль не шутишь!', 1322305699);
+INSERT INTO `tbl_comment` VALUES (1, 1, 1, 8, 1, 1, 1, NULL, 1322571069);
+INSERT INTO `tbl_comment` VALUES (2, 1, 2, 7, 2, 1, 1, 'Проверка комментариев!', 1322571083);
+INSERT INTO `tbl_comment` VALUES (3, 1, 3, 6, 3, 1, 2, 'Полет нормальный!', 1322571103);
+INSERT INTO `tbl_comment` VALUES (4, 4, 1, 2, 1, 2, 1, NULL, 1322572626);
+INSERT INTO `tbl_comment` VALUES (5, 1, 4, 5, 4, 1, 2, 'Проверка рейтинга комментарий!', 1322584074);
+
+-- --------------------------------------------------------
+
+-- 
+-- Структура таблицы `tbl_comment_rating`
+-- 
+
+CREATE TABLE `tbl_comment_rating` (
+  `id` int(11) NOT NULL auto_increment,
+  `rating` tinyint(1) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- Дамп данных таблицы `tbl_comment_rating`
+-- 
+
 
 -- --------------------------------------------------------
 
@@ -144,8 +159,8 @@ CREATE TABLE `tbl_post` (
 -- Дамп данных таблицы `tbl_post`
 -- 
 
-INSERT INTO `tbl_post` VALUES (1, 2, 'Yii blog', '<p><img src="http://localhost/blog/upload/images/logo.png" alt="" width="173" height="40" /></p>\r\n<p>Новый блог на Yii</p>\r\n<!--cut--> \r\n<ul>\r\n<li>RBAC</li>\r\n<li>Config</li>\r\n<li>Rating post</li>\r\n<li>Comments Nested Set</li>\r\n</ul>', '<p><img src="http://localhost/blog/upload/images/logo.png" alt="" width="173" height="40" /></p>\r\n<p>Новый блог на Yii</p>\r\n', 'yii, blog', 2, 0, 1322305280, 1322338885);
-INSERT INTO `tbl_post` VALUES (2, 2, 'Yii blog 2', '<p><img src="http://localhost/blog/upload/avatars/admin/19_11_2011_13_02_26_admin.jpg" alt="" width="50" height="50" /></p>\r\n<p>Новый блог на Yii</p>\r\n<!--cut--> \r\n<ul>\r\n<li>RBAC</li>\r\n<li>Config</li>\r\n<li>Rating post</li>\r\n<li>Comments Nested Set</li>\r\n</ul>', '<p><img src="http://localhost/blog/upload/avatars/admin/19_11_2011_13_02_26_admin.jpg" alt="" width="50" height="50" /></p>\r\n<p>Новый блог на Yii</p>\r\n', 'blog, yii', 2, 0, 1322305511, 1322338894);
+INSERT INTO `tbl_post` VALUES (1, 1, 'Что такое Yii?', '<p>Yii &mdash; это высокоэффективный основанный на компонентной структуре PHP-фреймворк для разработки масштабных веб-приложений. Он позволяет максимально применить концепцию повторного использования кода и может существенно ускорить процесс веб-разработки. Название Yii (произносится как Yee или [ji:]) означает простой (easy), эффективный (efficient) и расширяемый (extensible).</p>\r\n<!--cut-->\r\n<p><img src="http://localhost/blog/upload/images/logo.png" alt="" width="173" height="40" /></p>', '<p>Yii &mdash; это высокоэффективный основанный на компонентной структуре PHP-фреймворк для разработки масштабных веб-приложений. Он позволяет максимально применить концепцию повторного использования кода и может существенно ускорить процесс веб-разработки. Название Yii (произносится как Yee или [ji:]) означает простой (easy), эффективный (efficient) и расширяемый (extensible).</p>\r\n', 'yii, framework', 2, 0, 1322571069, 1322571069);
+INSERT INTO `tbl_post` VALUES (2, 1, 'Yii 1.1.8', '<p>Вышел релиз Yii 1.1.8, включающий более 80 багфиксов, новых возможностей и улучшений. Огромное спасибо тем, кто репортил баги, предлагал новые фичи и использовал по назначению Orphus на&nbsp;<a href="http://yiiframework.ru/">yiiframework.ru</a>.</p>\r\n<p>Забрать свежий дистрибутив можно&nbsp;<a href="http://www.yiiframework.com/download/">с официального сайта</a>.</p>\r\n<p>Инструкции по обновлению можно почитать в&nbsp;<a href="http://www.yiiframework.com/files/UPGRADE-1.1.8.txt">UPGRADE</a>.</p>\r\n<p>Полный список изменений, как обычно, можно прочитать в&nbsp;<a href="http://www.yiiframework.com/files/CHANGELOG-1.1.8.txt">CHANGELOG</a>, мы же бегло рассмотрим самое интересное.</p>\r\n<!--cut-->\r\n<p><img src="http://localhost/blog/upload/images/logo.png" alt="" width="173" height="40" /></p>', '<p>Вышел релиз Yii 1.1.8, включающий более 80 багфиксов, новых возможностей и улучшений. Огромное спасибо тем, кто репортил баги, предлагал новые фичи и использовал по назначению Orphus на&nbsp;<a href="http://yiiframework.ru/">yiiframework.ru</a>.</p>\r\n<p>Забрать свежий дистрибутив можно&nbsp;<a href="http://www.yiiframework.com/download/">с официального сайта</a>.</p>\r\n<p>Инструкции по обновлению можно почитать в&nbsp;<a href="http://www.yiiframework.com/files/UPGRADE-1.1.8.txt">UPGRADE</a>.</p>\r\n<p>Полный список изменений, как обычно, можно прочитать в&nbsp;<a href="http://www.yiiframework.com/files/CHANGELOG-1.1.8.txt">CHANGELOG</a>, мы же бегло рассмотрим самое интересное.</p>\r\n', 'yii, framework', 2, 0, 1322572626, 1322572626);
 
 -- --------------------------------------------------------
 
@@ -160,16 +175,15 @@ CREATE TABLE `tbl_post_rating` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `rating` (`rating`,`post_id`,`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- 
 -- Дамп данных таблицы `tbl_post_rating`
 -- 
 
-INSERT INTO `tbl_post_rating` VALUES (1, 4, 2, 2);
-INSERT INTO `tbl_post_rating` VALUES (2, 4, 1, 1);
-INSERT INTO `tbl_post_rating` VALUES (3, 5, 2, 1);
-INSERT INTO `tbl_post_rating` VALUES (4, 4.5, 1, 2);
+INSERT INTO `tbl_post_rating` VALUES (1, 3.5, 1, 2);
+INSERT INTO `tbl_post_rating` VALUES (2, 5, 2, 2);
+INSERT INTO `tbl_post_rating` VALUES (3, 4.5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +203,7 @@ CREATE TABLE `tbl_tag` (
 -- 
 
 INSERT INTO `tbl_tag` VALUES (1, 'yii', 2);
-INSERT INTO `tbl_tag` VALUES (2, 'blog', 2);
+INSERT INTO `tbl_tag` VALUES (2, 'framework', 2);
 
 -- --------------------------------------------------------
 

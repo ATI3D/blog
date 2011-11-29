@@ -67,8 +67,9 @@ class Comment extends CActiveRecord
 			array('id, root, lft, rgt, level, post_id, user_id, content, create_time', 'safe', 'on'=>'search'),
             */
             array('post_id, user_id, create_time', 'safe'),
-            array('content','required'),
-            array('content', 'length', 'max'=>1000),
+            array('content','safe','on'=>'root'),
+            array('content','required', 'on'=>'insert'),
+            array('content', 'length', 'max'=>1000, 'on'=>'insert'),
 		);
 	}
 

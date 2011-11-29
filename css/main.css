@@ -320,6 +320,12 @@ div.search-form
     overflow: hidden;
 }
 
+.comment .rating
+{
+    text-decoration: none;
+    padding-left: 20px;
+}
+
 .comment .time
 {
 	color: #888;

@@ -211,27 +211,32 @@ class PostController extends Controller
 
         //echo $_POST['rate']; exit();
 
-        $model = new PostRating;
-        $model->rating = $_POST['rate'];
-        $model->post_id = $_POST['id'];
-        $model->user_id = Yii::app()->user->id;
+		if(Yii::app()->request->isPostRequest)
+		{
+            $model = new PostRating;
+            $model->rating = $_POST['rate'];
+            $model->post_id = $_POST['id'];
+            $model->user_id = Yii::app()->user->id;
 
-        $count = PostRating::model()->exists(
-            'post_id=:post_id AND user_id=:user_id',
-            array(
-                 ':post_id'=>$_POST['id'],
-                 ':user_id'=>Yii::app()->user->id
-            )
-        );
+            $count = PostRating::model()->exists(
+                'post_id=:post_id AND user_id=:user_id',
+                array(
+                     ':post_id'=>$_POST['id'],
+                     ':user_id'=>Yii::app()->user->id
+                )
+            );
 
-        if($count)
-            echo 'Вы уже голосовали.';
+            if($count)
+                echo 'Вы уже голосовали.';
 
-        elseif($model->save())
-            echo 'Спасибо ваш голос учтен.';
+            elseif($model->save())
+                echo 'Спасибо ваш голос учтен.';
 
-        else
-            echo 'Произошла ошибка при голосовании.';
+            else
+                echo 'Произошла ошибка при голосовании.';
+        }
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 
     }
 
