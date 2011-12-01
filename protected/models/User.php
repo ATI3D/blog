@@ -52,21 +52,21 @@ class User extends CActiveRecord
 			// username and password are required
 			array('group_id, create_time', 'numerical', 'integerOnly'=>true),
 			
-			array('username, password', 'required', 'on'=>'login'),
-			array('username, password', 'length', 'max'=>128),
+			array('username, password', 'required', 'on'=>'login, registration'),
+			array('username, password', 'length', 'max'=>128, 'on'=>'insert, update, login, registration'),
 			array('username','unique','on'=>'insert, update'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean', 'on'=>'login'),
 			// password needs to be authenticated
 			array('password', 'authenticate', 'on'=>'login'),
 			
-			array('username, password, password_repeat', 'required', 'on'=>'insert'),
-			array('password', 'compare', 'compareAttribute'=>'password_repeat', 'on'=>'insert'),
+			array('username, password, password_repeat', 'required', 'on'=>'insert, registration'),
+			array('password', 'compare', 'compareAttribute'=>'password_repeat', 'on'=>'insert, registration'),
 			
 			array('username, role', 'required', 'on'=>'update'),
-			
-			//array('username, password, role', 'required'),
-			//array('username, password, role', 'length', 'max'=>128),
+            array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements(),'on'=>'registration'),
+            array('verifyCode', 'required', 'on'=>'registration'),
+
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, password, role, create_time', 'safe', 'on'=>'search'),
@@ -91,7 +91,7 @@ class User extends CActiveRecord
      */
     public function getRoleText()
     {
-        $options=$this->roleOptions;
+        $options=$this->getRoleOptions();  //$options=$this->roleOptions;
         return $options[$this->role];
     }
 	
@@ -148,6 +148,7 @@ class User extends CActiveRecord
 			'rememberMe'=>'Запомнить меня?',
 			'create_time'=>'Создан',
 			'members'=>'Участники',
+            'verifyCode'=>'Капча',
 		);
 	}
 	

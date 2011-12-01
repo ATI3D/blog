@@ -18,6 +18,7 @@ class UserController extends Controller
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
+                'testLimit'=>1,
 			),
 		);
 	}	
@@ -41,7 +42,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('login','index','view'),
+				'actions'=>array('login','index','view','registration','captcha'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -80,6 +81,30 @@ class UserController extends Controller
 			'model'=>$this->loadUserModel($id),
 		));
 	}
+
+    /**
+   	 * Displays the registration page
+   	 */
+   	public function actionRegistration()
+   	{
+   		$model=new User;
+
+   		// scenario registration
+   		$model->scenario = 'registration';
+
+   		if(isset($_POST['User']))
+   		{
+   			$model->attributes=$_POST['User'];
+   			if($model->save())
+   			{
+   				Yii::app()->user->setFlash('success','Спасибо, Вы успешно зарегистрированы в системе, можете войти под своим логином.');
+   				$this->redirect(Yii::app()->baseUrl);
+   			}
+   		}
+
+   		// display the registration form
+   		$this->render('registration',array('model'=>$model));
+   	}
 
 	/**
 	 * Creates a new model.
