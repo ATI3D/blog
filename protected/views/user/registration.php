@@ -17,22 +17,28 @@ $this->pageTitle=Yii::app()->name . ' - Регистрация';
 		<p class="note">Поля обозначенные <span class="required">*</span> обязательны для заполнения.</p>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'username'); ?>
-			<?php echo $form->textField($model,'username'); ?>
-			<?php echo $form->error($model,'username'); ?>
+			<?php echo $form->labelEx($user,'username'); ?>
+			<?php echo $form->textField($user,'username'); ?>
+			<?php echo $form->error($user,'username'); ?>
 		</div>
 
+        <div class="row">
+      			<?php echo $form->labelEx($profile,'email'); ?>
+      			<?php echo $form->textField($profile,'email'); ?>
+      			<?php echo $form->error($profile,'email'); ?>
+      		</div>
+
 		<div class="row">
-			<?php echo $form->labelEx($model,'password'); ?>
-			<?php echo $form->passwordField($model,'password'); ?>
-			<?php echo $form->error($model,'password'); ?>
+			<?php echo $form->labelEx($user,'password'); ?>
+			<?php echo $form->passwordField($user,'password'); ?>
+			<?php echo $form->error($user,'password'); ?>
 			<p class="hint"></p>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($model,'password_repeat'); ?>
-			<?php echo $form->passwordField($model,'password_repeat'); ?>
-			<?php echo $form->error($model,'password_repeat'); ?>
+			<?php echo $form->labelEx($user,'password_repeat'); ?>
+			<?php echo $form->passwordField($user,'password_repeat'); ?>
+			<?php echo $form->error($user,'password_repeat'); ?>
 			<p class="hint">
 				Повторите пароль.
 			</p>
@@ -40,13 +46,13 @@ $this->pageTitle=Yii::app()->name . ' - Регистрация';
 
 		<?php if(CCaptcha::checkRequirements()): ?>
 		<div class="row">
-			<?php echo $form->labelEx($model,'verifyCode'); ?>
+			<?php echo $form->labelEx($user,'verifyCode'); ?>
 			<div>
 				<?php $this->widget('CCaptcha'); ?>
-				<?php echo $form->textField($model,'verifyCode'); ?>
+				<?php echo $form->textField($user,'verifyCode'); ?>
 			</div>
 			    <div class="hint">Введите символы с картинки.</div>
-            <?php echo $form->error($model,'verifyCode'); ?>
+            <?php echo $form->error($user,'verifyCode'); ?>
 		</div>
 		<?php endif; ?>
 

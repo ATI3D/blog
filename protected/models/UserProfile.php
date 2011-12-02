@@ -43,12 +43,13 @@ class UserProfile extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('user_id, first_name, last_name, email, phone, birthday, avatar, level, last_login', 'required', 'on'=>'update'),
-			array('email', 'required', 'on'=>'update'),
+			array('email', 'required'),
 			array('email', 'email'),
-			array('avatar', 'file', 'types'=>'jpg, gif, png', 'maxSize' => 1048576, 'allowEmpty'=>true),
-			array('birthday', 'date', 'format'=>'yyyy-MM-dd', 'message'=>'Неправильный формат поля День рождения. (Пример: 1970-12-31)'),
-			array('user_id, level, last_login', 'numerical', 'integerOnly'=>true),
-			array('first_name, last_name, email, phone, avatar', 'length', 'max'=>255),
+            array('email', 'unique'),
+			array('avatar', 'file', 'types'=>'jpg, gif, png', 'maxSize' => 1048576, 'allowEmpty'=>true, 'on'=>'update'),
+			array('birthday', 'date', 'format'=>'yyyy-MM-dd', 'message'=>'Неправильный формат поля День рождения. (Пример: 1970-12-31)', 'on'=>'update'),
+			array('user_id, level, last_login', 'numerical', 'integerOnly'=>true, 'on'=>'update'),
+			array('first_name, last_name, email, phone, avatar', 'length', 'max'=>255, 'on'=>'update'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, user_id, first_name, last_name, email, phone, birthday, avatar, level, last_login', 'safe', 'on'=>'search'),

@@ -18,6 +18,10 @@ class UserController extends Controller
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
+                'width'=>90,
+                'height'=>40,
+                'minLength'=>3,
+                'maxLength'=>5,
                 'testLimit'=>1,
 			),
 		);
@@ -56,12 +60,10 @@ class UserController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('create','update'),
-				//'users'=>array('admin'),
 				'roles'=>array(User::ROLE_MODER),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				//'users'=>array('admin'),
 				'roles'=>array(User::ROLE_ADMIN),
 			),
 			array('deny',  // deny all users
@@ -83,27 +85,43 @@ class UserController extends Controller
 	}
 
     /**
-   	 * Displays the registration page
+   	 * Creates a new model.
+   	 * If registration is successful, the browser will be redirected to the 'homeUrl' page.
    	 */
    	public function actionRegistration()
    	{
-   		$model=new User;
+   		$user=new User;
+        $profile=new UserProfile;
 
    		// scenario registration
-   		$model->scenario = 'registration';
+        $user->scenario = 'registration';
 
-   		if(isset($_POST['User']))
-   		{
-   			$model->attributes=$_POST['User'];
-   			if($model->save())
-   			{
-   				Yii::app()->user->setFlash('success','Спасибо, Вы успешно зарегистрированы в системе, можете войти под своим логином.');
-   				$this->redirect(Yii::app()->baseUrl);
-   			}
-   		}
+        if(isset($_POST['User'], $_POST['UserProfile']))
+        {
+            $user->attributes=$_POST['User'];
+            $profile->attributes=$_POST['UserProfile'];
+
+             // validate BOTH $user and $profile
+             $valid = $user->validate();
+             $valid = $profile->validate() && $valid;
+
+            if($valid)
+            {
+                $profile->user_id = $user->id;
+
+                $user->save(false);
+            	$profile->save(false);
+                Yii::app()->user->setFlash('success','Спасибо, Вы успешно зарегистрированы в системе, можете войти под своим логином.');
+            	$this->redirect(Yii::app()->homeUrl);
+            }
+
+        }
 
    		// display the registration form
-   		$this->render('registration',array('model'=>$model));
+   		$this->render('registration',array(
+               'user'=>$user,
+               'profile'=>$profile,
+        ));
    	}
 
 	/**
@@ -118,11 +136,21 @@ class UserController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if(isset($_POST['User'], $_POST['UserProfile']))
 		{
 			$user->attributes=$_POST['User'];
+            $profile->attributes=$_POST['UserProfile'];
+
+            // validate BOTH $user and $profile
+            $valid = $user->validate();
+            $valid = $profile->validate() && $valid;
+
 			if($user->save())
-				$this->redirect(array('view','id'=>$user->id));
+            {
+                $user->save(false);
+            	$profile->save(false);
+                $this->redirect(array('view','id'=>$user->id));
+            }
 		}
 
 		$this->render('create',array(

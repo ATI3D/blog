@@ -54,7 +54,7 @@ class User extends CActiveRecord
 			
 			array('username, password', 'required', 'on'=>'login, registration'),
 			array('username, password', 'length', 'max'=>128, 'on'=>'insert, update, login, registration'),
-			array('username','unique','on'=>'insert, update'),
+			array('username','unique','on'=>'insert, update, registration'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean', 'on'=>'login'),
 			// password needs to be authenticated
@@ -108,7 +108,8 @@ class User extends CActiveRecord
 		}
 		return parent::beforeSave();
 	}
-	
+
+    /*
 	protected function afterSave()
 	{
 		if($this->isNewRecord)
@@ -119,6 +120,7 @@ class User extends CActiveRecord
 		}
 		return parent::afterSave();
 	}
+    */
 	
 	/**
 	 * @return array relational rules.
