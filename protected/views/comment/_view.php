@@ -54,9 +54,17 @@
                                                array(
                                                    'type' => 'POST',
                                                    'data' => array('id' => $comment->id, 'rating' => 1),
+                                                   'dataType'=>'json',
                                                    //'update' => '.rating',
                                                    'success' => 'function(data){
-                                                       $("#voteplus' . $comment->id . '").parent("span.rating").text(data);
+                                                       if(data.status == "success")
+                                                       {
+                                                            $("#voteplus' . $comment->id . '").parent("span.rating").text(data.message);
+                                                       }
+                                                       else
+                                                       {
+                                                            $("#voteplus' . $comment->id . '").parent("span.rating").text(data.message);
+                                                       }
                                                    }'
                                                ),
                                                array('id'=>'voteplus'.$comment->id)
@@ -68,9 +76,17 @@
                                                array(
                                                    'type' => 'POST',
                                                    'data' => array('id' => $comment->id, 'rating' => -1),
+                                                   'dataType'=>'json',
                                                    //'update' => '.rating',
                                                    'success' => 'function(data){
-                                                       $("#voteminus' . $comment->id . '").parent("span.rating").text(data);
+                                                       if(data.status == "success")
+                                                       {
+                                                            $("#voteplus' . $comment->id . '").parent("span.rating").text(data.message);
+                                                       }
+                                                       else
+                                                       {
+                                                            $("#voteplus' . $comment->id . '").parent("span.rating").text(data.message);
+                                                       }
                                                    }'
                                                ),
                                                array('id'=>'voteminus'.$comment->id)

@@ -270,13 +270,34 @@ class CommentController extends Controller
             );
 
             if($count)
-                echo 'Вы уже голосовали.';
+            {
+                echo CJSON::encode(array(
+                    'status' => 'error',
+                    'message' => 'Вы уже голосовали'
+                ));
+                // exit;
+                Yii::app()->end();
+            }
 
             elseif($model->save())
-                echo 'Спасибо ваш голос учтен.';
+            {
+                echo CJSON::encode(array(
+                    'status' => 'success',
+                    'message' => 'Спасибо, ваш голос учтен'
+                ));
+                // exit;
+                Yii::app()->end();
+            }
 
             else
-                echo 'Произошла ошибка при голосовании.';
+            {
+                echo CJSON::encode(array(
+                    'status' => 'error',
+                    'message' => 'Только авторизованные пользователи могут голосовать'
+                ));
+                // exit;
+                Yii::app()->end();
+            }
         }
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
