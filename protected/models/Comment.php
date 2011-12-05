@@ -36,6 +36,15 @@ class Comment extends CActiveRecord
 		return '{{comment}}';
 	}
 
+    public function scopes()
+    {
+        return array(
+            'published'=>array(
+                  'condition'=>'level > 1',
+            ),
+        );
+    }
+
     public function behaviors()
     {
         return array(
@@ -94,6 +103,7 @@ class Comment extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'user'=>array(self::BELONGS_TO, 'User', 'user_id'),
+            'post'=>array(self::BELONGS_TO, 'Post', 'post_id'),
 		);
 	}
 

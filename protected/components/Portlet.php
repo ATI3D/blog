@@ -9,7 +9,8 @@ class Portlet extends CWidget
 	public function getViewPath()
     {
         //$themeManager=Yii::app()->themeManager;
-        return 'protected/views/portlets';
+        //return 'themes/classic/views/portlets';
+        return Yii::app()->theme->basePath . '/views/portlets';
     }
  
     public function init()

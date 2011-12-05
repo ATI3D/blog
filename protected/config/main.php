@@ -9,6 +9,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'onBeginRequest'=>array('RequestHandler', 'initCoreSettings'),
     'defaultController'=>'post',
+    'theme'=>'autofix', //classic
 
 	// preloading 'log' component
 	'preload'=>array('log'),
