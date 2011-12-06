@@ -20,9 +20,7 @@
         <?php endif; ?>
 
         <?php echo CHtml::openTag('li'); ?>
-            <div class="comment" style="background-color: <?php echo $comment->id == $_GET['pid'] ? '#F5F5F5' : ''; ?>">
-
-                <a name="c<?php echo $comment->id; ?>"></a>
+            <div class="comment" name="c<?php echo $comment->id; ?>" style="background-color: <?php echo $comment->id == $_GET['pid'] ? '#F5F5F5' : ''; ?>">
 
                 <?php/* echo CHtml::link("", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
                     'class'=>'cid',

@@ -45,7 +45,7 @@ class UserProfile extends CActiveRecord
 			//array('user_id, first_name, last_name, email, phone, birthday, avatar, level, last_login', 'required', 'on'=>'update'),
 			array('email', 'required'),
 			array('email', 'email'),
-            array('email', 'unique'),
+            array('email', 'unique', 'on'=>'insert'),
 			array('avatar', 'file', 'types'=>'jpg, gif, png', 'maxSize' => 1048576, 'allowEmpty'=>true, 'on'=>'update'),
 			array('birthday', 'date', 'format'=>'yyyy-MM-dd', 'message'=>'Неправильный формат поля День рождения. (Пример: 1970-12-31)', 'on'=>'update'),
 			array('user_id, level, last_login', 'numerical', 'integerOnly'=>true, 'on'=>'update'),

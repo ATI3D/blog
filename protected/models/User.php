@@ -53,7 +53,7 @@ class User extends CActiveRecord
 			array('group_id, create_time', 'numerical', 'integerOnly'=>true),
 			
 			array('username, password', 'required', 'on'=>'login, registration'),
-			array('username, password', 'length', 'max'=>128, 'on'=>'insert, update, login, registration'),
+			array('username, password, password_repeat', 'length', 'max'=>128, 'on'=>'insert, update, login, registration'),
 			array('username','unique','on'=>'insert, update, registration'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean', 'on'=>'login'),
@@ -61,7 +61,7 @@ class User extends CActiveRecord
 			array('password', 'authenticate', 'on'=>'login'),
 			
 			array('username, password, password_repeat', 'required', 'on'=>'insert, registration'),
-			array('password', 'compare', 'compareAttribute'=>'password_repeat', 'on'=>'insert, registration'),
+			array('password', 'compare', 'compareAttribute'=>'password_repeat', 'on'=>'insert, update, registration'),
 			
 			array('username, role', 'required', 'on'=>'update'),
             array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements(),'on'=>'registration'),

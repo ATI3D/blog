@@ -8,7 +8,7 @@
         <!-- post block -->
         <div class="p">
             <?php if(Yii::app()->user->checkAccess(User::ROLE_MODER)): ?>
-                <span class="status_<?php echo $data->status; ?>" style="float: right;"><?php echo Lookup::item("PostStatus",$data->status); ?></span>
+                <span class="status<?php echo $data->status; ?>" style="float: right;"><?php echo Lookup::item("PostStatus",$data->status); ?></span>
             <?php endif; ?>
             <h2>
                 <?php echo CHtml::link(CHtml::encode($data->title), $data->url); ?>

@@ -169,7 +169,8 @@ class UserController extends Controller
 		$user = $this->loadUserModel($id);
 		$profile = $this->loadUserProfileModel($user->id);
 		
-		$password = $user->password;
+		$password = $user->password; // @TODO
+        $avatar = $profile->avatar;  // @TODO
 		
 		//var_dump($_POST); exit();
 		
@@ -192,6 +193,10 @@ class UserController extends Controller
 				$user->password=md5($user->password);
 			elseif(!$user->password)
 				$user->password = $password;
+
+            // Обновлена ли аватара?!
+            if(!$profile->avatar)
+                $profile->avatar = $avatar;
 			
 			if($valid)
 			{

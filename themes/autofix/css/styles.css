@@ -2,7 +2,8 @@
 * {margin:0; padding:0; font-family:arial;}
 html, body {width:100%;height:100%;}
 input, button, textarea, select {font: normal 12px "tahoma", sans-serif; vertical-align: middle; }
-legend { display: none; }
+/* legend { display: none; } */
+legend { font-size: 14px; padding: 3px; }
 fieldset { border: none; }
 ul, ol { list-style: none; }
 ol { list-style-type: decimal;}
@@ -14,7 +15,7 @@ h1{padding: 10px 0 18px 0; font-size:21px;}
 h2{padding: 10px 0 12px 0; font-size:17px; color:#79220B;}
 h3{padding: 10px 0 10px 0; font-size:16px;}
 p, ol, blockquote, pre{padding: 0 0 1em}
-a {#7B250D; text-decoration:underline;}
+a {color: #7B250D; text-decoration:underline;}
 a:hover { color:#995132; text-decoration:none;}
 div.clear {clear: both !important;visibility: hidden !important;margin:0 !important;overflow: hidden;font-size:1px;}
 
@@ -199,3 +200,47 @@ h3#reply-title {margin: 18px 0;}
 #respond .form-allowed-tags code {font-size: 11px;}
 #respond .form-submit {margin: 12px 0;}
 #respond .form-submit input {font-size: 14px;}
+
+
+div.flash-error, div.flash-notice, div.flash-success
+{
+	padding:.8em;
+	border:1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+div.flash-error
+{
+	background:#FBE3E4;
+	color:#8a1f11;
+	border-color:#FBC2C4;
+}
+
+div.flash-notice
+{
+	background:#FFF6BF;
+	color:#514721;
+	border-color:#FFD324;
+}
+
+div.flash-success
+{
+	background:#E6EFC2;
+	color:#264409;
+	border-color:#C6D880;
+}
+
+div.flash-error a
+{
+	color:#8a1f11;
+}
+
+div.flash-notice a
+{
+	color:#514721;
+}
+
+div.flash-success a
+{
+	color:#264409;
+}

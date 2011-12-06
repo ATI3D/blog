@@ -40,7 +40,8 @@ class Comment extends CActiveRecord
     {
         return array(
             'published'=>array(
-                  'condition'=>'level > 1',
+                'condition'=>'level > 1',
+                'order'=>'create_time DESC',
             ),
         );
     }

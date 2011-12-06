@@ -20,9 +20,7 @@
         <?php endif; ?>
 
         <?php echo CHtml::openTag('li'); ?>
-            <div class="comment" style="background-color: <?php echo $comment->id == $_GET['pid'] ? '#F5F5F5' : ''; ?>">
-
-                <a name="c<?php echo $comment->id; ?>"></a>
+            <div name="c<?php echo $comment->id; ?>" class="comment" style="background-color: <?php echo $comment->id == $_GET['pid'] ? '#F5F5F5' : ''; ?>">
 
                 <?php/* echo CHtml::link("", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
                     'class'=>'cid',
@@ -49,7 +47,7 @@
                 <span class="rating">
                     <?php echo CommentRating::getRating($comment->id); ?>
 
-                    <?php echo CHtml::ajaxLink(CHtml::image(Yii::app()->baseUrl . '/images/plus.png', 'Плюсануть'),
+                    <?php echo CHtml::ajaxLink(CHtml::image(Yii::app()->theme->baseUrl . '/images/plus.png', 'Плюсануть'),
                                                Yii::app()->createUrl('comment/rating'),
                                                array(
                                                    'type' => 'POST',
@@ -71,7 +69,7 @@
                                             );
                     ?>
 
-                    <?php echo CHtml::ajaxLink(CHtml::image(Yii::app()->baseUrl . '/images/minus.png', 'Минусануть'),
+                    <?php echo CHtml::ajaxLink(CHtml::image(Yii::app()->theme->baseUrl . '/images/minus.png', 'Минусануть'),
                                                Yii::app()->createUrl('comment/rating'),
                                                array(
                                                    'type' => 'POST',

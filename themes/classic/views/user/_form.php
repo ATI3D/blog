@@ -28,6 +28,12 @@
 			<?php echo $form->error($user,'username'); ?>
 		</div>
 
+        <div class="row">
+            <?php echo $form->labelEx($profile,'email'); ?>
+            <?php echo $form->textField($profile,'email',array('size'=>20,'maxlength'=>128,'disabled'=>'disabled')); ?>
+            <?php echo $form->error($profile,'email'); ?>
+     	</div>
+
 		<div class="row">
 			<?php echo $form->labelEx($user,'password'); ?>
 			<?php if(!$user->isNewRecord): ?>
@@ -36,15 +42,15 @@
 			<?php echo $form->passwordField($user,'password',array('value'=>'','size'=>20,'maxlength'=>32)); ?>
 			<?php echo $form->error($user,'password'); ?>
 		</div>
-		
-		<?php if($user->isNewRecord): ?>
+
+		<?php // if($user->isNewRecord): ?>
 			<div class="row">
 				<?php echo $form->labelEx($user,'password_repeat'); ?>
 				<div class="hint">Еще раз введите пароль</div>
 				<?php echo $form->passwordField($user,'password_repeat',array('value'=>'','size'=>20,'maxlength'=>32)); ?>
 				<?php echo $form->error($user,'password_repeat'); ?>
 			</div>
-		<?php endif; ?>
+		<?php // endif; ?>
 
 		<?php if(Yii::app()->user->checkAccess(User::ROLE_ADMIN)): ?>
 			<div class="row">
@@ -77,12 +83,6 @@
 				<?php echo $form->labelEx($profile,'last_name'); ?>
 				<?php echo $form->textField($profile,'last_name',array('size'=>20,'maxlength'=>128)); ?>
 				<?php echo $form->error($profile,'last_name'); ?>
-			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($profile,'email'); ?>
-				<?php echo $form->textField($profile,'email',array('size'=>20,'maxlength'=>128)); ?>
-				<?php echo $form->error($profile,'email'); ?>
 			</div>
 			
 			<div class="row">
