@@ -17,10 +17,10 @@
                 <?php echo implode(', ', $data->tagLinks); ?>
             </div>
             <p>
-                <?php echo (int)$_GET['id'] ? $data->content : $data->short_content; ?>
+                <?php echo Yii::app()->getRequest()->getQuery('id') ? $data->content : $data->short_content; ?>
             </p>
             <div class="morebut">
-                <?php if(!$_GET['id']): ?>
+                <?php if(!Yii::app()->getRequest()->getQuery('id')): ?>
                     <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . '/images/morepic.gif', 'Читать далее', array('width'=>148,'height'=>'28')), $data->url); ?>
                 <?php endif; ?>
             </div>

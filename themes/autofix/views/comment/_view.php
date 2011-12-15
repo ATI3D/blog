@@ -20,11 +20,7 @@
         <?php endif; ?>
 
         <?php echo CHtml::openTag('li'); ?>
-            <div name="c<?php echo $comment->id; ?>" class="comment" style="background-color: <?php echo $comment->id == $_GET['pid'] ? '#F5F5F5' : ''; ?>">
-
-                <?php/* echo CHtml::link("", array('post/view', 'id'=>$comment->post_id, '#'=>'c' . $comment->id), array(
-                    'class'=>'cid',
-                ));*/ ?>
+            <div name="c<?php echo $comment->id; ?>" class="comment" style="background-color: <?php echo $comment->id == Yii::app()->getRequest()->getQuery('pid') ? '#F5F5F5' : ''; ?>">
 
                 <span class="avatar">
                     <?php echo CHtml::image(Yii::app()->baseUrl . '/upload/avatars/' . $comment->user->username . '/' . $comment->user->profile->avatar, $comment->user->username, array(

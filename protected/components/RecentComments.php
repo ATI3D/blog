@@ -12,7 +12,7 @@ class RecentComments extends Portlet
 
 	protected function renderContent()
 	{
-		$this->render('recentComments',array(
+		$this->render('RecentComments',array(
 			'comments'=>$this->getRecentComments(),
 		));
 	}

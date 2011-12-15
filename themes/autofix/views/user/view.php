@@ -17,15 +17,6 @@ $this->menu=array(
 
 <h1>Пользователь &rarr; <?php echo $model->username; ?></h1>
 
-<?php/* $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'username',
-		'role',
-	),
-)); */?>
-
 <div class="view">
 
 	<?php if($model->profile->avatar): ?>
