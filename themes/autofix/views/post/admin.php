@@ -17,7 +17,11 @@ $this->menu=array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
+		array(
+            'name'=>'id',
+            'visible'=>Yii::app()->user->checkAccess(User::ROLE_ADMIN),
+        ),
+        //'id',
 		//'user_id',
 		'title',
 		//'content',
