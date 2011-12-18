@@ -28,11 +28,19 @@
 			<?php echo $form->error($user,'username'); ?>
 		</div>
 
-        <div class="row">
-            <?php echo $form->labelEx($profile,'email'); ?>
-            <?php echo $form->textField($profile,'email',array('size'=>20,'maxlength'=>128,'disabled'=>'disabled')); ?>
-            <?php echo $form->error($profile,'email'); ?>
-     	</div>
+        <?php if(!$user->isNewRecord): ?>
+            <div class="row">
+                <?php echo $form->labelEx($profile,'email'); ?>
+                <?php echo $form->textField($profile,'email',array('size'=>20,'maxlength'=>128,'disabled'=>'disabled')); ?>
+                <?php echo $form->error($profile,'email'); ?>
+            </div>
+        <?php else: ?>
+            <div class="row">
+                <?php echo $form->labelEx($profile,'email'); ?>
+                <?php echo $form->textField($profile,'email',array('size'=>20,'maxlength'=>128)); ?>
+                <?php echo $form->error($profile,'email'); ?>
+            </div>
+        <?php endif; ?>
 
 		<div class="row">
 			<?php echo $form->labelEx($user,'password'); ?>

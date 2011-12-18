@@ -55,6 +55,8 @@ class User extends CActiveRecord
 			array('username, password', 'required', 'on'=>'login, registration'),
 			array('username, password, password_repeat', 'length', 'max'=>128, 'on'=>'insert, update, login, registration'),
 			array('username','unique','on'=>'insert, update, registration'),
+            // /^[A-Za-zА-Яа-яs,]+$/u
+            array('username', 'match', 'pattern' => '/^[a-zA-Z0-9_]+$/u', 'message'=>'Можно использовать только латинские буквы и цифры', 'on'=>'insert, registration'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean', 'on'=>'login'),
 			// password needs to be authenticated
